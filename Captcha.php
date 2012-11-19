@@ -179,9 +179,7 @@ class SimpleCaptcha {
 		global $wgCaptchaWhitelistIP;
 
 		if ( $wgCaptchaWhitelistIP ) {
-			global $wgRequest;
-
-			$ip = $wgRequest->getIP();
+			$ip = wfGetIP();
 
 			foreach ( $wgCaptchaWhitelistIP as $range ) {
 				if ( IP::isInRange( $ip, $range ) ) {
@@ -198,8 +196,7 @@ class SimpleCaptcha {
 	 * @access private
 	 */
 	function badLoginKey() {
-		global $wgRequest;
-		$ip = $wgRequest->getIP();
+		$ip = wfGetIP();
 		return wfMemcKey( 'captcha', 'badlogin', 'ip', $ip );
 	}
 
