@@ -66,19 +66,18 @@ class CaptchaSessionStore extends CaptchaStore {
 	}
 
 	function store( $index, $info ) {
-		$_SESSION['captcha' . $info['index']] = $info;
+		global $wgRequest;
+		$wgRequest->setSessionData( 'captcha' . $info['index'], $info );
 	}
 
 	function retrieve( $index ) {
-		if ( isset( $_SESSION['captcha' . $index] ) ) {
-			return $_SESSION['captcha' . $index];
-		} else {
-			return false;
-		}
+		global $wgRequest;
+		return $wgRequest->getSessionData( 'captcha' . $index );
 	}
 
 	function clear( $index ) {
-		unset( $_SESSION['captcha' . $index] );
+		global $wgRequest;
+		$wgRequest->setSessionData( 'captcha' . $info['index'], NULL );
 	}
 
 	function cookiesNeeded() {
