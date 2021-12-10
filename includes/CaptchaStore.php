@@ -77,7 +77,7 @@ class CaptchaSessionStore extends CaptchaStore {
 
 	function clear( $index ) {
 		global $wgRequest;
-		$wgRequest->setSessionData( 'captcha' . $info['index'], NULL );
+		$wgRequest->setSessionData( 'captcha' . $index, NULL );
 	}
 
 	function cookiesNeeded() {
